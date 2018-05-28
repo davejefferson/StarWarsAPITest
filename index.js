@@ -1,14 +1,7 @@
-
-
-
-let orignalNumber;
-
 const planetNumber = () => {
     return Math.floor(Math.random() * 61 + 1);
    
 }
-
-
 
 const fetchApiData = (event) => {
     if (event){
@@ -17,23 +10,42 @@ const fetchApiData = (event) => {
         return response.json();
     })
         .then ((myJson) => {
-            console.log(myJson);
-            content = myJson; 
-            changeInnerHtml();
-        
-            console.log(content.name)
+            
+            content = myJson;
+            console.log(content);            
+            
+            changeInnerHtml(planetInfoBuilder(content));
+            
         });
-    } else{}
+    } else{
+        throw error;
+    }
+}
+
+const planetInfoBuilder = (content) => {
+   
+    stringToReturn = stringBuilder(content)   
+    return stringToReturn;
+}
+
+const changeInnerHtml = (stringToDisplay) => {
+    document.getElementById("apiInfo").innerHTML = stringToDisplay;
+    // console.log(stringToDisplay);
 }
 
 
 
 
+const stringBuilder = (content) => {
+    const keys = Object.keys(content);
+    const values = Object.values(content);
+    let planetInfo ="";
 
-
-const changeInnerHtml = () => {
-    console.log("HI")
-    document.getElementById("apiInfo").innerHTML = content.name;
+        for (let index = 0; index < keys.length; index++) {
+            planetInfo = planetInfo + keys[index] + ": " + values[index] + "<br>"
+        
+    }
+    return planetInfo;    
 }
 
-const button = document.getElementById("button").addEventListener("click", fetchApiData) ;
+const button = document.getElementById("button").addEventListener("click", fetchApiData);
