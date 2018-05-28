@@ -7,8 +7,10 @@ h1 {
     text-align: center;
 }
 p {
-    color: yellow;
+    color:black;
+    background-color: yellow;
     text-align: center;
+    text-transform: capitalize;
 }
 
 #buttonholder {
